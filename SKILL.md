@@ -47,6 +47,8 @@ python scripts/images_to_pdf.py page1.jpg page2.png page3.webp --output result.p
 - `--skip-invalid`: Skip unreadable image files and continue.
 - `--jpeg-quality <1-100>`: Control embedded image JPEG quality.
 - `--title <text>`: Set PDF title metadata.
+- `--author <text>`: Set PDF author metadata.
+- `--subject <text>`: Set PDF subject metadata.
 
 ## Validation checklist
 

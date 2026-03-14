@@ -33,7 +33,7 @@ Do **not** use it when:
 - Apply EXIF orientation correction
 - Flatten alpha channels to white background
 - Preserve aspect ratio
-- Support page size, orientation, margin, sorting, skip-invalid, JPEG quality, and title metadata
+- Support page size, orientation, margin, sorting, skip-invalid, JPEG quality, and title/author/subject metadata
 - Auto-generate output path from the first input file when `--output` is omitted
 
 ## Script entrypoint
@@ -52,6 +52,8 @@ python scripts/images_to_pdf.py <image1> <image2> ... [options]
 - `--skip-invalid`: skip unreadable images instead of failing fast
 - `--jpeg-quality <1-100>`: JPEG quality for embedded images
 - `--title <text>`: set PDF title metadata
+- `--author <text>`: set PDF author metadata
+- `--subject <text>`: set PDF subject metadata
 
 ## Recommended operating procedure
 

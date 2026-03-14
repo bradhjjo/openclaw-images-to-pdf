@@ -130,18 +130,45 @@ def test_render_pdf_writes_title_metadata(tmp_path: Path) -> None:
     assert reader.metadata.title == "Homework 5"
 
 
+def test_render_pdf_writes_author_and_subject_metadata(tmp_path: Path) -> None:
+    image1 = create_image(tmp_path / "one.jpg")
+    output = tmp_path / "meta.pdf"
+
+    render_pdf([image1], output, title="Homework 5", author="Franky", subject="AI Assignment")
+
+    reader = PdfReader(str(output))
+    assert reader.metadata.title == "Homework 5"
+    assert reader.metadata.author == "Franky"
+    assert reader.metadata.subject == "AI Assignment"
+
+
 def test_main_creates_output_pdf(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
     image1 = create_image(tmp_path / "one.jpg")
     image2 = create_image(tmp_path / "two.jpg")
     output = tmp_path / "merged.pdf"
 
-    code = main([str(image1), str(image2), "--output", str(output), "--title", "Demo PDF"])
+    code = main(
+        [
+            str(image1),
+            str(image2),
+            "--output",
+            str(output),
+            "--title",
+            "Demo PDF",
+            "--author",
+            "Franky",
+            "--subject",
+            "Merged Notes",
+        ]
+    )
 
     assert code == 0
     assert output.exists()
     reader = PdfReader(str(output))
     assert len(reader.pages) == 2
     assert reader.metadata.title == "Demo PDF"
+    assert reader.metadata.author == "Franky"
+    assert reader.metadata.subject == "Merged Notes"
     out = capsys.readouterr().out
     assert "Processed: 2" in out
     assert "Skipped: 0" in out

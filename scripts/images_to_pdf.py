@@ -78,10 +78,9 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
         default=95,
         help="JPEG quality for embedded images (1-100)",
     )
-    parser.add_argument(
-        "--title",
-        help="Optional PDF title metadata",
-    )
+    parser.add_argument("--title", help="Optional PDF title metadata")
+    parser.add_argument("--author", help="Optional PDF author metadata")
+    parser.add_argument("--subject", help="Optional PDF subject metadata")
     return parser.parse_args(argv)
 
 
@@ -201,6 +200,8 @@ def render_pdf(
     skip_invalid: bool = False,
     jpeg_quality: int = 95,
     title: str | None = None,
+    author: str | None = None,
+    subject: str | None = None,
 ) -> RenderSummary:
     if not image_paths:
         raise ValueError("At least one image is required to render a PDF.")
@@ -211,6 +212,10 @@ def render_pdf(
     pdf = canvas.Canvas(str(output_path))
     if title:
         pdf.setTitle(title)
+    if author:
+        pdf.setAuthor(author)
+    if subject:
+        pdf.setSubject(subject)
 
     processed_count = 0
     skipped_count = 0
@@ -268,6 +273,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         skip_invalid=args.skip_invalid,
         jpeg_quality=args.jpeg_quality,
         title=args.title,
+        author=args.author,
+        subject=args.subject,
     )
     print(
         f"Output: {summary.output_path}\n"

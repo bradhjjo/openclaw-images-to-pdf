@@ -26,6 +26,8 @@ Use it for:
 - Skip invalid images with `--skip-invalid`
 - Control embedded JPEG quality with `--jpeg-quality`
 - Set PDF title metadata with `--title`
+- Set PDF author metadata with `--author`
+- Set PDF subject metadata with `--subject`
 - Auto-generate output path when `--output` is omitted
 
 ## Requirements
@@ -60,10 +62,14 @@ python scripts/images_to_pdf.py receipt1.jpg receipt2.jpg
 python scripts/images_to_pdf.py good1.jpg broken.jpg good2.jpg --skip-invalid --output merged.pdf
 ```
 
-### Set title metadata
+### Set title/author/subject metadata
 
 ```bash
-python scripts/images_to_pdf.py a.jpg b.jpg --title "Homework 5" --output hw5.pdf
+python scripts/images_to_pdf.py a.jpg b.jpg \
+  --title "Homework 5" \
+  --author "Franky" \
+  --subject "AI Assignment" \
+  --output hw5.pdf
 ```
 
 ### Full example
@@ -88,6 +94,8 @@ python scripts/images_to_pdf.py \
 - `--skip-invalid`: skip unreadable images instead of failing fast
 - `--jpeg-quality <1-100>`: JPEG quality for embedded images
 - `--title <text>`: set PDF title metadata
+- `--author <text>`: set PDF author metadata
+- `--subject <text>`: set PDF subject metadata
 
 ## Tests
 
